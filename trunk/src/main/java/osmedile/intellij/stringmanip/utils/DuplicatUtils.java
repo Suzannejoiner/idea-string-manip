@@ -62,13 +62,21 @@ public class DuplicatUtils {
         try {
             number = NumberUtils.createNumber(str);
         } catch (NumberFormatException e) {
-            //try to create a double
+            //Not a number, ignore it, will try to create a double
+
+        } catch (IndexOutOfBoundsException e) {
+            //Bug in createNumber, ignore it, will try to create a double
+        }
+
+
+        if (number == null) {
             try {
                 number = NumberUtils.createDouble(str);
             } catch (Exception e1) {
                 //nothing to do, really not a number or too complex for NumberUtils
             }
         }
+
         Number n;
         if (number != null) {
             if (number instanceof Float) {

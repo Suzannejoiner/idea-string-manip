@@ -569,7 +569,7 @@
   </component>
   <component name="TrackLink.CheckinHandlerFactory" checkbox="false" filtering="false" dialogWidth="700" dialogHeight="580" />
   <component name="VcsDirectoryMappings">
-    <mapping directory="" vcs="" />
+    <mapping directory="" vcs="svn" />
     <mapping directory="$PROJECT_DIR$" vcs="svn" />
   </component>
   <component name="VssConfiguration">
