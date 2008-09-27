@@ -37,6 +37,15 @@
     <change-notes>
         <![CDATA[
         <p>
+        <h4>Version 1.3</h4>
+        <ul>
+            <li>Fixed duplicate and increment</li>
+            <li>Convert escaped Unicode to String</li>
+            <li>Remove empty lines</li>
+            <li>Duplicate and decrement numbers in a text</li>
+        </ul>
+        </p>
+        <p>
         <h4>Version 1.2</h4>
         <h5>New features:</h5>
         <ul>
@@ -67,7 +76,7 @@
         </p>
     ]]>
     </change-notes>
-    <version>1.2</version>
+    <version>1.3</version>
     <vendor email="osmedile@gmail.com">Olivier Smedile</vendor>
     <idea-version since-build="7361" />
     <actions>
