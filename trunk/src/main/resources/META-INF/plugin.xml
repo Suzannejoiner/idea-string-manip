@@ -39,10 +39,9 @@
         <p>
         <h4>Version 1.3</h4>
         <ul>
-            <li>Fixed duplicate and increment</li>
-            <li>Convert escaped Unicode to String</li>
-            <li>Remove empty lines</li>
-            <li>Duplicate and decrement numbers in a text</li>
+            <li>Fixed a bug in duplicate and increment actions when line contains '.' and 'e'</li>
+            <li>Fixed exception when clicking cancel on grep dialog</li>
+            <li>Grep action now warns when no text is selected</li>
         </ul>
         </p>
         <p>

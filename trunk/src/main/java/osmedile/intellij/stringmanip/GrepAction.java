@@ -6,6 +6,7 @@ import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.editor.actionSystem.EditorAction;
 import com.intellij.openapi.editor.actionSystem.EditorWriteActionHandler;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.text.StringUtil;
 import osmedile.intellij.stringmanip.utils.StringUtils;
 
 import java.util.ArrayList;
@@ -30,6 +31,9 @@ public class GrepAction extends EditorAction {
                 if (selectionModel.hasSelection()) {
 
                     String grepos = Messages.showInputDialog(editor.getProject(), "Grep text", "Grep", null);
+                    if (StringUtil.isEmptyOrSpaces(grepos)) {
+                        return;
+                    }
                     final String selectedText = selectionModel.getSelectedText();
 
 
@@ -48,6 +52,9 @@ public class GrepAction extends EditorAction {
                     final String s = StringUtils.join(res, '\n');
                     editor.getDocument().replaceString(selectionModel.getSelectionStart(),
                             selectionModel.getSelectionEnd(), s);
+                } else {
+                    Messages.showInfoMessage(editor.getProject(), "Please select text, before using grep",
+                            "Grep");
                 }
 
             }
