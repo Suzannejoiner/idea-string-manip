@@ -12,7 +12,8 @@ import junit.framework.TestSuite;
  * @since <pre>03/21/2008</pre>
  */
 public class StringUtilTest extends TestCase {
-    public StringUtilTest(String name) {
+	
+	public StringUtilTest(String name) {
         super(name);
     }
 
@@ -45,6 +46,12 @@ public class StringUtilTest extends TestCase {
                 StringUtil.wordsAndCamelToConstantCase("test again     _    _    test"));
         assertEquals("TEST_AGAIN__TEST", StringUtil.wordsAndCamelToConstantCase("TestAgain_   _    Test"));
     }
+	
+	public void testEscapedUnicodeToString() throws Exception {
+		assertEquals("Čás", StringUtil.escapedUnicodeToString("\\u010c\\u00e1s"));
+		assertEquals("abcčd", StringUtil.escapedUnicodeToString("abc\\u010Dd"));
+		assertEquals("ěščřžýáíéĚŠČŘŽÝÁÍÉ", StringUtil.escapedUnicodeToString("\\u011B\\u0161\\u010D\\u0159\\u017E\\u00FD\\u00E1\\u00ED\\u00E9\\u011A\\u0160\\u010C\\u0158\\u017D\\u00DD\\u00C1\\u00CD\\u00C9"));
+	}
 
     public void testWordsToConstantCase() {
         assertEquals("THISISATEXT", StringUtil.wordsToConstantCase("ThisIsAText"));

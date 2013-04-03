@@ -21,7 +21,7 @@ public class PopupChoiceAction extends AnAction {
 
     public void actionPerformed(AnActionEvent e) {
         ListPopup popup = JBPopupFactory.getInstance().createActionGroupPopup(null, actionGroup,
-                e.getDataContext(), JBPopupFactory.ActionSelectionAid.NUMBERING, false);
+                e.getDataContext(), JBPopupFactory.ActionSelectionAid.SPEEDSEARCH, false);
 
         popup.showInBestPositionFor(e.getDataContext());
 
