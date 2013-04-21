@@ -23,20 +23,25 @@
            <li>Remove empty lines</li>
            <li>Convert non ASCII to escaped Unicode</li>
            <li>Convert escaped Unicode to String</li>
-       </ul>
-       If no text is selected, then the current line is selected.
-       <ul>
            <li>Grep selected text, All lines not matching input text wil be removed.
             (Does not work in column mode)</li>
            <li>Increment/Decrement selected text. Duplicate line and increment/decrement all numbers found.
             (Does not work in column mode)</li>
+           <li>Alt+A - Swap Characters</li>
        </ul>
        </p>
+       If no text is selected, then the current line is selected.
        <p>Actions are available under Edit menu, or via the shortcut "alt M" and "alt shift M".</p>
        ]]>
     </description>
     <change-notes>
         <![CDATA[
+        <p>
+        <h4>Version 2.1</h4>
+        <ul>
+            <li>Alt+A - Exchange two selected characters, or ones surrounding the cursor if no selection</li>
+        </ul>
+        </p>
         <p>
         <h4>Version 2.0 - Resurrection of the plugin</h4>
         <ul>
@@ -89,7 +94,8 @@
         </p>
     ]]>
     </change-notes>
-    <version>2.0</version>
+	
+    <version>2.1</version>
     <vendor email="vojta.krasa@gmail.com">Olivier Smedile, Vojtech Krasa</vendor>
     <idea-version since-build="100.0" />
 	
@@ -236,8 +242,15 @@
                     class="osmedile.intellij.stringmanip.UnicodeEscapedToStringAction"
                     text="Escaped Unicode to String" description="Escaped Unicode to String">
             </action>
+			
         </group>
-	
+		
+		<action id="osmedile.intellij.stringmanip.SwapCharactersAction"
+				class="osmedile.intellij.stringmanip.SwapCharactersAction" text="Swap Characters"
+				description="Exchange two selected characters, or ones surrounding the cursor if no selection">
+			<keyboard-shortcut keymap="$default" first-keystroke="alt A" />
+		</action>
+
 	</actions>
 </idea-plugin>
     
