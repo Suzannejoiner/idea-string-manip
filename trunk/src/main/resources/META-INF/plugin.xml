@@ -37,6 +37,13 @@
     <change-notes>
         <![CDATA[
         <p>
+        <h4>Version 2.1.1</h4>
+        <ul>
+            <li>Swap Characters - bugfix</li>
+        </ul>
+        </p>
+        <![CDATA[
+        <p>
         <h4>Version 2.1</h4>
         <ul>
             <li>Alt+A - Exchange two selected characters, or ones surrounding the cursor if no selection</li>

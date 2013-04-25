@@ -1,6 +1,7 @@
 package osmedile.intellij.stringmanip;
 
 import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.editor.actionSystem.EditorAction;
@@ -21,6 +22,8 @@ public class SwapCharactersAction extends EditorAction {
 				int selectionStart = selectionModel.getSelectionStart();
 				int selectionEnd = selectionModel.getSelectionEnd();
 
+				final Document document = editor.getDocument();
+				final int textLength = document.getTextLength();
 				if (selectionModel.hasBlockSelection()) {
 					int[] blockStarts = selectionModel.getBlockSelectionStarts();
 					int[] blockEnds = selectionModel.getBlockSelectionEnds();
@@ -33,10 +36,13 @@ public class SwapCharactersAction extends EditorAction {
 							blockStart--;
 							blockEnd++;
 						}
-						String selectedText = editor.getDocument().getText(TextRange.create(blockStart, blockEnd));
+						if (blockStart<0 || blockEnd > textLength) {
+							continue;
+						}
+						String selectedText = document.getText(TextRange.create(blockStart, blockEnd));
 						String newTextPart = transform(selectedText);
 
-						editor.getDocument().replaceString(blockStart + plusOffset, blockEnd + plusOffset, newTextPart);
+						document.replaceString(blockStart + plusOffset, blockEnd + plusOffset, newTextPart);
 
 						int realOldTextLength = blockEnd - blockStart;
 						plusOffset += newTextPart.length() - realOldTextLength;
@@ -46,14 +52,17 @@ public class SwapCharactersAction extends EditorAction {
 					if (selectedText == null) {
 						selectionStart = selectionStart - 1;
 						selectionEnd = selectionEnd + 1;
-						selectedText = editor.getDocument().getText(TextRange.create(selectionStart, selectionEnd));
+						if (selectionStart<0 || selectionEnd > textLength) {
+							return;
+						}
+						selectedText = document.getText(TextRange.create(selectionStart, selectionEnd));
 					}
 
 					if (selectedText == null) {
 						return;
 					}
 	
-					editor.getDocument().replaceString(selectionStart,
+					document.replaceString(selectionStart,
 							selectionEnd, transform(selectedText));
 				}
 			}
