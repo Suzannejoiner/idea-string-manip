@@ -32,7 +32,8 @@ public class IncrementAction extends EditorAction {
 
 
                 final SelectionModel selectionModel = editor.getSelectionModel();
-                if (selectionModel.hasSelection() == false) {
+				boolean hasSelection = selectionModel.hasSelection();
+				if (hasSelection == false) {
                     selectionModel.selectLineAtCaret();
                 }
                 final String selectedText = selectionModel.getSelectedText();
@@ -47,8 +48,16 @@ public class IncrementAction extends EditorAction {
                     final String s = StringUtils.join(textParts);
                     editor.getDocument().insertString(selectionModel.getSelectionEnd(), s);
 
-                    selectionModel.removeSelection();
-                    caretModel.moveToLogicalPosition(new LogicalPosition(line + 1, column));
+					if (hasSelection) {
+						long selectionStart = selectionModel.getSelectionStart();
+						long selectionEnd = selectionModel.getSelectionEnd();
+						long length = s.length();
+						caretModel.moveCaretRelatively((int)length, 0, false, false, false);
+						selectionModel.setSelection((int) (selectionStart + length), (int) (selectionEnd + length));
+					} else {
+						selectionModel.removeSelection();
+						caretModel.moveToLogicalPosition(new LogicalPosition(line + 1, column));
+					} 
                 }
             }
         });
