@@ -1,5 +1,6 @@
 package osmedile.intellij.stringmanip;
 
+import com.intellij.openapi.editor.ScrollType;
 import osmedile.intellij.stringmanip.utils.DuplicatUtils;
 import osmedile.intellij.stringmanip.utils.StringUtil;
 import osmedile.intellij.stringmanip.utils.StringUtils;
@@ -30,6 +31,7 @@ public class DecrementAction extends EditorAction {
 
 				final int line = caretModel.getLogicalPosition().line;
 				final int column = caretModel.getLogicalPosition().column;
+				long offset = caretModel.getOffset();
 
 				final SelectionModel selectionModel = editor.getSelectionModel();
 				boolean hasSelection = selectionModel.hasSelection();
@@ -52,8 +54,9 @@ public class DecrementAction extends EditorAction {
 						long selectionStart = selectionModel.getSelectionStart();
 						long selectionEnd = selectionModel.getSelectionEnd();
 						long length = s.length();
-						caretModel.moveCaretRelatively((int) -length, 0, false, false, false);
+						caretModel.moveToOffset((int) (offset));
 						selectionModel.setSelection((int) (selectionStart -length), (int) (selectionEnd -length));
+						editor.getScrollingModel().scrollToCaret(ScrollType.RELATIVE);
 					} else {
 						selectionModel.removeSelection();
 						caretModel.moveToLogicalPosition(new LogicalPosition(line, column));
