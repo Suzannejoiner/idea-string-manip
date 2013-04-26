@@ -4,6 +4,7 @@ import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.LogicalPosition;
+import com.intellij.openapi.editor.ScrollType;
 import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.editor.actionSystem.EditorAction;
 import com.intellij.openapi.editor.actionSystem.EditorWriteActionHandler;
@@ -29,9 +30,9 @@ public class IncrementAction extends EditorAction {
 
                 final int line = caretModel.getLogicalPosition().line;
                 final int column = caretModel.getLogicalPosition().column;
+				long offset = caretModel.getOffset();
 
-
-                final SelectionModel selectionModel = editor.getSelectionModel();
+				final SelectionModel selectionModel = editor.getSelectionModel();
 				boolean hasSelection = selectionModel.hasSelection();
 				if (hasSelection == false) {
                     selectionModel.selectLineAtCaret();
@@ -52,8 +53,9 @@ public class IncrementAction extends EditorAction {
 						long selectionStart = selectionModel.getSelectionStart();
 						long selectionEnd = selectionModel.getSelectionEnd();
 						long length = s.length();
-						caretModel.moveCaretRelatively((int)length, 0, false, false, false);
+						caretModel.moveToOffset((int) (offset+length));
 						selectionModel.setSelection((int) (selectionStart + length), (int) (selectionEnd + length));
+						editor.getScrollingModel().scrollToCaret(ScrollType.RELATIVE);
 					} else {
 						selectionModel.removeSelection();
 						caretModel.moveToLogicalPosition(new LogicalPosition(line + 1, column));
