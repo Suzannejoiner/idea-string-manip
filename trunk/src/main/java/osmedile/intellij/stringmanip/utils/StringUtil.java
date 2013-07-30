@@ -185,7 +185,7 @@ public class StringUtil {
 
 
     public static String escapedUnicodeToString(String s) {
-        String[] parts = StringUtil.splitPreserveAllTokens(s, "\\\\u[0-9a-eA-E]{4}");
+		String[] parts = StringUtil.splitPreserveAllTokens(s, "\\\\u[0-9a-fA-F]{4}");
         for (int i = 0; i < parts.length; i++) {
             if (parts[i].startsWith("\\u")) {
                 int v = Integer.parseInt(parts[i].substring(2), 16);
