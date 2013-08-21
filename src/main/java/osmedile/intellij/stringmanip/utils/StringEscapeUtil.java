@@ -705,5 +705,17 @@ public class StringEscapeUtil {
         return StringUtils.replace(str, "'", "''");
     }
 
-}
+	public static String escapePHP(String s) {
+		if (s == null) {
+			return null;
+		}
+		return s.replace("\\", "\\\\").replace("'", "\\'").replace("\"", "\\\"").replace("$", "\\$");
+	}
 
+	public static String unescapePHP(String s) {
+		if (s == null) {
+			return null;
+		}
+		return s.replace("\\\\", "\\").replace("\\'", "'").replace("\\\"", "\"").replace("\\$", "$");
+	}
+}
