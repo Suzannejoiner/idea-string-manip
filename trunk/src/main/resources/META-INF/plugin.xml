@@ -37,6 +37,14 @@
     <change-notes>
         <![CDATA[
         <p>
+        <h4>Version 2.4</h4>
+        <ul>
+            <li>Fixed bug: if end-of-line was selected as last character, then it was removed</li>
+            <li>Disabled default shortcut for swap characters</li>
+            <li>New actions for PHP escaping</li>
+        </ul>
+        </p>
+        <p>
         <h4>Version 2.3</h4>
         <ul>
             <li>Fixed: Convert escaped Unicode to String</li>
@@ -114,7 +122,7 @@
     ]]>
     </change-notes>
 	
-    <version>2.3</version>
+    <version>2.4</version>
     <vendor email="vojta.krasa@gmail.com">original author: Olivier Smedile, current maintainer: Vojtech Krasa</vendor>
     <idea-version since-build="100.0" />
 	
@@ -261,13 +269,19 @@
                     class="osmedile.intellij.stringmanip.UnicodeEscapedToStringAction"
                     text="Escaped Unicode to String" description="Escaped Unicode to String">
             </action>
-			
+			<action id="osmedile.intellij.stringmanip.EscapePHPAction"
+                    class="osmedile.intellij.stringmanip.EscapePHPAction"
+                    text="Escape PHP" description="Call StringEscapeUtils.escapePHP(selectedText)">
+            </action>
+            <action id="osmedile.intellij.stringmanip.UnescapePHPAction"
+                    class="osmedile.intellij.stringmanip.UnescapePHPAction"
+                    text="Unescape PHP" description="Call StringEscapeUtils.unescapePHP(selectedText)">
+            </action>
         </group>
 		
 		<action id="osmedile.intellij.stringmanip.SwapCharactersAction"
 				class="osmedile.intellij.stringmanip.SwapCharactersAction" text="Swap Characters"
 				description="Exchange two selected characters, or ones surrounding the cursor if no selection">
-			<keyboard-shortcut keymap="$default" first-keystroke="alt A" />
 		</action>
 
 	</actions>

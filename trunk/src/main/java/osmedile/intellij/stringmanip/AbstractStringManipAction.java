@@ -35,6 +35,9 @@ public abstract class AbstractStringManipAction extends EditorAction {
 						if (selectedText == null) {
 							return;
 						}
+					} else if (selectedText.endsWith("\n")) {
+						allLinSelected = true;
+
 					}
 					String[] textParts = selectedText.split("\n");
 					if (selectionModel.hasBlockSelection()) {
