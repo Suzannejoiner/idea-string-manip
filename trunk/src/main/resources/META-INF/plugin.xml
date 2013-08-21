@@ -11,6 +11,7 @@
            <li>Un/Escape selected HTML text</li>
            <li>Un/Escape selected XML text</li>
            <li>Un/Escape selected SQL text</li>
+           <li>Un/Escape selected PHP text</li>
            <li>Trim selected text</li>
            <li>Trim all spaces in selected text</li>
            <li>Remove all spaces in selected text</li>
